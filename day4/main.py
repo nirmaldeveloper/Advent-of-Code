@@ -93,5 +93,9 @@ def findXYPattern(input):
   #print(diagonal_sum)
   return sum
 
+#Part 1
 total_sum += findXYPattern(input)
 print(total_sum)
+
+#Part 2
+
