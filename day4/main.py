@@ -15,6 +15,8 @@ with open("input.csv", "r") as f:
   input_real = f.read()
 
 f.close()
+
+#Part 1
 total_sum =0
 #Distance has to be atleast 3 top and bottom, diagonally left and right
 def checkBottomLeftBound(currentIndexDis, lenBelow):
@@ -91,9 +93,60 @@ def findXYPattern(input):
   #print(diagonal_sum)
   return sum
 
-#Part 1
-total_sum += findXYPattern(input)
+
+total_sum += findXYPattern(input_real)
 print(total_sum)
 
 #Part 2
+total_x_mass_sum = 0
 
+word = "MAS"
+
+def checkTopLeftBoundForA(currentLineIndex, charIndex):
+    return currentLineIndex > 0 and charIndex > 0 
+def checkTopRightBoundForA(currentLineIndex, charIndex, lineLen):
+    return currentLineIndex > 0 and (lineLen - (charIndex +1)) > 0 
+def checkBottomLeftBoundForA(currentLineIndex, charIndex, linesCount):
+    return (linesCount - (currentLineIndex + 1)) > 0 and charIndex > 0 
+def checkBottomRightBoundForA(currentLineIndex, charIndex, lineLen, linesCount):
+    return (linesCount - (currentLineIndex + 1)) > 0 and (lineLen - (charIndex +1)) > 0
+def topLeftChar(a):
+    return a
+def topRightChar(a):
+    return a
+def bottomLeftChar(a):
+    return a
+def bottomRightChar(a):
+    return a
+
+def findXPattern(input):
+  output_lines = input.split("\n")
+  sum = 0
+  #print(len(output_lines))
+  #Iterate line by line to check number of X-MAS from each line
+  for a in range(0, len(output_lines)):
+      pivot_char = "A"
+      #Get index of A for each line from 1 to number of lines - 1
+      #Changed it to get from all lines from 0 to len of number of lines - 1
+      output_A = [i for i,x in enumerate(output_lines[a]) if x == pivot_char]
+      for x in output_A:
+        #check if X-MAS has a range for top-left, top-right, bottom-left, bottom-right and doesn't go out of range
+        if(checkTopLeftBoundForA(a, x) and checkTopRightBoundForA(a, x, len(output_lines[a])) and checkBottomLeftBoundForA(a, x, len(output_lines)) and checkBottomRightBoundForA(a, x, len(output_lines[a]), len(output_lines))):
+            #Four Edges scenario to check if M or S forms which opposite edges
+            if(
+               (topLeftChar(output_lines[a-1][x-1]) == "M" and topRightChar(output_lines[a-1][x+1]) == "M" 
+               and bottomLeftChar(output_lines[a+1][x-1]) == "S" and bottomRightChar(output_lines[a+1][x+1])=="S")
+               or 
+               (topLeftChar(output_lines[a-1][x-1]) == "M" and bottomLeftChar(output_lines[a+1][x-1]) == "M" 
+               and topRightChar(output_lines[a-1][x+1]) == "S" and bottomRightChar(output_lines[a+1][x+1])=="S")
+               or
+               (topLeftChar(output_lines[a-1][x-1]) == "S" and topRightChar(output_lines[a-1][x+1]) == "S" 
+               and bottomLeftChar(output_lines[a+1][x-1]) == "M" and bottomRightChar(output_lines[a+1][x+1])=="M")
+               or 
+               (topLeftChar(output_lines[a-1][x-1]) == "S" and bottomLeftChar(output_lines[a+1][x-1]) == "S" 
+               and topRightChar(output_lines[a-1][x+1]) == "M" and bottomRightChar(output_lines[a+1][x+1])=="M")):
+                sum += 1
+  return sum
+
+total_x_mass_sum += findXPattern(input_real)
+print(total_x_mass_sum)
