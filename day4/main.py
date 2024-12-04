@@ -94,7 +94,7 @@ def findXYPattern(input):
   return sum
 
 
-total_sum += findXYPattern(input_real)
+total_sum += findXYPattern(input)
 print(total_sum)
 
 #Part 2
@@ -148,5 +148,5 @@ def findXPattern(input):
                 sum += 1
   return sum
 
-total_x_mass_sum += findXPattern(input_real)
+total_x_mass_sum += findXPattern(input)
 print(total_x_mass_sum)
