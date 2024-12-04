@@ -16,8 +16,6 @@ with open("input.csv", "r") as f:
 
 f.close()
 total_sum =0
-def find(s, ch):
-    return [i for i, ltr in enumerate(s) if ltr == ch]
 #Distance has to be atleast 3 top and bottom, diagonally left and right
 def checkBottomLeftBound(currentIndexDis, lenBelow):
     return (currentIndexDis > 2 and lenBelow > 2)
