@@ -5,7 +5,6 @@ input = ""
 with open("input.csv", "r") as f:
   input = f.read()
 
-f.close()
 #part 1
 total_sum =0
 def findPattern(input):
