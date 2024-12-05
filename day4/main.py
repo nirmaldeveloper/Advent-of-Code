@@ -14,8 +14,6 @@ input_real = ""
 with open("input.csv", "r") as f:
   input_real = f.read()
 
-f.close()
-
 #Part 1
 total_sum =0
 #Distance has to be atleast 3 top and bottom, diagonally left and right
